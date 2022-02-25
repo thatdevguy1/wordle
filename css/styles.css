@@ -7,9 +7,10 @@ body {
 }
 
 main {
-  width: 95vw;
+  width: 58vw;
   max-width: 550px;
   height: 58vw;
+  max-height: 550px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
@@ -21,18 +22,18 @@ section {
 }
 
 section > div {
-  border: solid 2px rgb(207, 207, 207);
+  border: solid 2px rgb(119, 119, 119);
   width: 10vw;
-  max-width: 78px;
+  max-width: 100px;
   min-width: 50px;
   height: 10vw;
-  max-height: 78px;
+  max-height: 100px;
   min-height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 30px;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .message-box {
@@ -46,4 +47,18 @@ section > div {
   transform: translate(-50%, -100%);
   border: solid 1px rgb(194, 194, 194);
   border-radius: 5px;
+}
+
+@media only screen and (max-width: 640px) {
+  main {
+    width: 60vw;
+    height: 60vw;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  main {
+    width: 92vw;
+    height: 92vw;
+  }
 }
