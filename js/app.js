@@ -12,6 +12,62 @@ const words = [
   "BLOKE",
   "CHOKE",
   "PLANE",
+  "ABUSE",
+  "ADULT",
+  "AGENT",
+  "APPLE",
+  "AWARD",
+  "BASIS",
+  "BEACH",
+  "CLOCK",
+  "CYCLE",
+  "DEPTH",
+  "DRAMA",
+  "DRESS",
+  "DRINK",
+  "EVENT",
+  "ENEMY",
+  "ENTRY",
+  "FIELD",
+  "FAULT",
+  "FLOOR",
+  "FORCE",
+  "GLASS",
+  "GREEN",
+  "GUIDE",
+  "HEART",
+  "HORSE",
+  "HOTEL",
+  "IMAGE",
+  "INDEX",
+  "INPUT",
+  "MOTOR",
+  "PANEL",
+  "PILOT",
+  "PLANE",
+  "PRIDE",
+  "QUEEN",
+  "RIVER",
+  "RIGHT",
+  "RUGBY",
+  "SCORE",
+  "SENSE",
+  "SHAPE",
+  "SHEET",
+  "SMITH",
+  "TABLE",
+  "TOTAL",
+  "TOUCH",
+  "TRACK",
+  "TRUST",
+  "UNION",
+  "UNITY",
+  "VALUE",
+  "VIDEO",
+  "VISIT",
+  "WATER",
+  "WHILE",
+  "YOUTH",
 ];
 
 const state = {
@@ -57,17 +113,20 @@ function submitWord() {
   if (!state.currentGuessMatrix[state.wordIdx].includes(null)) {
     state.currentGuessMatrix[state.wordIdx].forEach((letter, idx) => {
       if (state.winningWord[idx] === letter) {
-        mainEl.children[state.wordIdx].children[idx].style.backgroundColor =
-          "#16AC26";
+        mainEl.children[state.wordIdx].children[
+          idx
+        ].lastElementChild.lastElementChild.style.backgroundColor = "#16AC26";
       } else if (state.winningWord.includes(letter)) {
-        mainEl.children[state.wordIdx].children[idx].style.backgroundColor =
-          "#D7D85C";
+        mainEl.children[state.wordIdx].children[
+          idx
+        ].lastElementChild.lastElementChild.style.backgroundColor = "#D7D85C";
       } else {
-        mainEl.children[state.wordIdx].children[idx].style.backgroundColor =
-          "#282828";
+        mainEl.children[state.wordIdx].children[
+          idx
+        ].lastElementChild.lastElementChild.style.backgroundColor = "#282828";
       }
     });
-    checkWin();
+    renderAnimation();
   }
 }
 
@@ -76,7 +135,7 @@ function removeLetter() {
     state.letterIdx === 5 ||
     state.currentGuessMatrix[state.wordIdx][state.letterIdx] === null
   ) {
-    state.letterIdx--;
+    if (state.letterIdx > 0) state.letterIdx--;
     state.currentGuessMatrix[state.wordIdx][state.letterIdx] = null;
   } else if (state.letterIdx >= 0) {
     state.currentGuessMatrix[state.wordIdx][state.letterIdx] = null;
@@ -106,7 +165,6 @@ function registerLetter(letter) {
 
 function selectWinningWord() {
   state.winningWord = words[Math.floor(Math.random() * words.length)];
-  console.log(state.winningWord);
 }
 
 function init() {
@@ -116,8 +174,9 @@ function init() {
   state.currentGuessMatrix.forEach((row, rowIdx) => {
     row.forEach((letter, letterIdx) => {
       state.currentGuessMatrix[rowIdx][letterIdx] = null;
-      mainEl.children[rowIdx].children[letterIdx].style.backgroundColor =
-        "black";
+      mainEl.children[rowIdx].children[letterIdx].classList.remove(
+        "letter-container-active"
+      );
     });
   });
 
@@ -128,12 +187,30 @@ function init() {
   render();
 }
 
+function renderAnimation() {
+  let counter = 0;
+  let animationInterval = setInterval(() => {
+    if (counter < 5) {
+      mainEl.children[state.wordIdx].children[counter].classList.add(
+        "letter-container-active"
+      );
+      counter++;
+    } else {
+      clearInterval(animationInterval);
+      checkWin();
+    }
+  }, 300);
+}
+
 function render() {
   let rowIdx = 0;
   for (let row of mainEl.children) {
     let letterIdx = 0;
     for (let letter of row.children) {
-      letter.textContent = state.currentGuessMatrix[rowIdx][letterIdx];
+      letter.firstElementChild.firstElementChild.textContent =
+        state.currentGuessMatrix[rowIdx][letterIdx];
+      letter.lastElementChild.lastElementChild.textContent =
+        state.currentGuessMatrix[rowIdx][letterIdx];
       letterIdx++;
     }
     rowIdx++;
