@@ -39,7 +39,10 @@ section > div {
 .message-box {
   position: absolute;
   display: none;
-  width: 50vw;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 30vw;
   padding: 25px;
   background: rgba(0, 0, 0, 0.9);
   left: 50%;
@@ -75,6 +78,9 @@ section > div {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* .letter-front {
@@ -84,6 +90,14 @@ section > div {
 
 .letter-back {
   transform: rotateY(180deg);
+}
+
+button {
+  background-color: rgb(0, 127, 185);
+  color: white;
+  border: solid 2px white;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 640px) {
