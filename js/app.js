@@ -5,6 +5,7 @@ const playAgainBtnEl = document.querySelector(".message-box > button");
 
 //static wordlist to be replaced by a word api in the future
 const words = [
+  "BEAST",
   "HYPER",
   "HELLO",
   "BREAD",
