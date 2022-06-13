@@ -1,0 +1,170 @@
+body {
+  background-color: black;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  color: rgb(237, 237, 237);
+}
+
+main {
+  width: 75vw;
+  max-width: 600px;
+}
+
+.word {
+  height: 12vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.letter {
+  height: 90%;
+  width: 18%;
+  border: solid 2px rgb(161, 161, 161);
+  color: rgb(234, 234, 234);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter-container {
+  background-color: transparent;
+  perspective: 1000px;
+}
+
+.letter-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.letter-container-active .letter-inner {
+  transform: rotateY(180deg);
+}
+
+.letter-front,
+.letter-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .letter-front {
+  background-color: #bbb;
+  color: black;
+} */
+
+.letter-back {
+  transform: rotateY(180deg);
+}
+
+span {
+  color: white;
+  cursor: pointer;
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.keyboard {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.keyboardRow {
+  display: flex;
+}
+
+.keyboard .key {
+  height: 35px;
+  width: 35px;
+  background-color: #f2f2f2;
+  color: black;
+  border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard .option {
+  width: auto;
+  padding: 0 10px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .word {
+    height: 17vw;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .word {
+    height: 12vw;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .word {
+    height: 9vw;
+  }
+}
+
+@media only screen and (min-width: 1250px) {
+  .word {
+    height: 6vw;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .keyboard .key {
+    width: 20px;
+    height: 20px;
+  }
+}
