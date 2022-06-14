@@ -27,7 +27,8 @@ main {
 .letter {
   height: 90%;
   width: 18%;
-  border: solid 2px rgb(161, 161, 161);
+  /* border: solid 2px rgb(161, 161, 161); */
+  background-color: #25242a;
   color: rgb(234, 234, 234);
   font-size: 2rem;
   display: flex;
@@ -56,6 +57,7 @@ main {
 
 .letter-front,
 .letter-back {
+  background-color: #1d1738;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -75,9 +77,26 @@ main {
   transform: rotateY(180deg);
 }
 
-span {
+.game-end-box {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 1px rgb(75, 75, 75);
+  padding: 25px;
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 30vw;
+}
+
+.game-end-box > button {
   cursor: pointer;
+  margin: 20px 0 0 0;
 }
 
 .shake {
@@ -108,6 +127,7 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
 }
 
 .keyboard .option {

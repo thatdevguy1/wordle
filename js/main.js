@@ -1,7 +1,7 @@
 //Elements in memory
 const mainEl = document.querySelector("main");
 const wordEls = document.querySelectorAll(".word");
-const spanEl = document.querySelector("span");
+const gameEndBox = document.querySelector(".game-end-box");
 const keyboardEl = document.querySelector(".keyboard");
 const keyEls = document.querySelectorAll(".key");
 
@@ -101,7 +101,7 @@ keyboardEl.addEventListener("click", handleClick);
 //Functions
 function handleClick(evt) {
   if (!evt.target.classList.contains("key")) return;
-  if (evt.target.textContent === "SUBMIT") {
+  if (evt.target.textContent === "ENTER") {
     if (
       state.letterCount === 4 &&
       state.wordMatrix[state.wordCount][state.letterCount].letter
@@ -158,17 +158,31 @@ function checkLetters() {
       (key) => key.textContent === letterObj.letter
     );
     if (state.winningWord.includes(letterObj.letter)) {
-      if (letterFreq[letterObj.letter] > 0) {
-        if (state.winningWord[idx] === letterObj.letter) {
+      if (state.winningWord[idx] === letterObj.letter) {
+        if (letterFreq[letterObj.letter].count > 0) {
           letterObj.backgroundColor = "#16AC26";
           keyElement.style.backgroundColor = "#16AC26";
-        } else {
+          letterFreq[letterObj.letter].count--;
+          letterFreq[letterObj.letter].color = "green";
+        } else if (letterFreq[letterObj.letter].color === "yellow") {
+          letterObj.backgroundColor = "#16AC26";
+          let yellowLetter = state.wordMatrix[state.wordCount].find(
+            (l) =>
+              l.letter === letterObj.letter && l.backgroundColor === "#D7D85C"
+          );
+          yellowLetter.backgroundColor = "#282828";
+          letterFreq[letterObj.letter].color = "green";
+        }
+      } else {
+        if (letterFreq[letterObj.letter].count > 0) {
           letterObj.backgroundColor = "#D7D85C";
           keyElement.style.backgroundColor = "#D7D85C";
+          letterFreq[letterObj.letter].count--;
+          letterFreq[letterObj.letter].color = "yellow";
+        } else {
+          keyElement.style.backgroundColor = "#282828";
+          letterObj.backgroundColor = "#282828";
         }
-        letterFreq[letterObj.letter]--;
-      } else {
-        letterObj.backgroundColor = "#282828";
       }
     } else {
       keyElement.style.backgroundColor = "#282828";
@@ -193,13 +207,19 @@ function checkForWin() {
 
   //come back and make this DRY
   if (state.winningWord === currentWord) {
-    spanEl.textContent = "You Win, Click me to restart";
-    spanEl.addEventListener("click", function () {
+    const text = document.createTextNode("You Win!");
+    gameEndBox.prepend(text);
+    gameEndBox.style.display = "flex";
+    gameEndBox.children[0].addEventListener("click", function () {
       init();
     });
   } else if (state.wordCount === 5) {
-    spanEl.textContent = "You Lose, Click me to restart";
-    spanEl.addEventListener("click", function () {
+    const text = document.createTextNode(
+      `You Lose! The word was ${state.winningWord}`
+    );
+    gameEndBox.prepend(text);
+    gameEndBox.style.display = "flex";
+    gameEndBox.children[0].addEventListener("click", function () {
       init();
     });
   } else {
@@ -240,7 +260,7 @@ function init() {
   state.letterCount = 0;
   state.wordCount = 0;
   state.winningWord = getWordFromAPI();
-  spanEl.textContent = "";
+  gameEndBox.style.display = "none";
   keyEls.forEach((key) => (key.style.backgroundColor = "#f2f2f2"));
 
   state.wordMatrix.forEach((word, wordIdx) => {
@@ -312,8 +332,8 @@ function frequencyCounter(word) {
 
   for (let i = 0; i < word.length; i++) {
     tempObj.hasOwnProperty(word[i])
-      ? (tempObj[word[i]] = tempObj[word[i]] + 1)
-      : (tempObj[word[i]] = 1);
+      ? (tempObj[word[i]] = tempObj[word[i]].count += 1)
+      : (tempObj[word[i]] = { count: 1, color: "" });
   }
   return tempObj;
 }
