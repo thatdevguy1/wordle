@@ -260,6 +260,10 @@ function init() {
   state.letterCount = 0;
   state.wordCount = 0;
   state.winningWord = getWordFromAPI();
+  debugger;
+  if (gameEndBox.childNodes[0] != gameEndBox.children[0]) {
+    gameEndBox.childNodes[0].remove();
+  }
   gameEndBox.style.display = "none";
   keyEls.forEach((key) => (key.style.backgroundColor = "#f2f2f2"));
 
