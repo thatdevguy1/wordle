@@ -180,7 +180,14 @@ function checkLetters() {
           letterFreq[letterObj.letter].count--;
           letterFreq[letterObj.letter].color = "yellow";
         } else {
-          keyElement.style.backgroundColor = "#282828";
+          if (
+            !(
+              letterFreq[letterObj.letter].color === "yellow" ||
+              letterFreq[letterObj.letter].color === "green"
+            )
+          ) {
+            keyElement.style.backgroundColor = "#282828";
+          }
           letterObj.backgroundColor = "#282828";
         }
       }
@@ -189,6 +196,7 @@ function checkLetters() {
       letterObj.backgroundColor = "#282828";
     }
   });
+  debugger;
   renderAnimation();
 }
 
@@ -260,7 +268,6 @@ function init() {
   state.letterCount = 0;
   state.wordCount = 0;
   state.winningWord = getWordFromAPI();
-  debugger;
   if (gameEndBox.childNodes[0] != gameEndBox.children[0]) {
     gameEndBox.childNodes[0].remove();
   }
