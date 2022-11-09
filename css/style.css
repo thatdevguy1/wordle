@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: rgb(255, 153, 153);
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
