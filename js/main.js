@@ -64,6 +64,7 @@ const DICTIONARY_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 function getWordFromAPI() {
   const options = {
     method: "GET",
+    //exposed API key, major nono
     headers: {
       "X-RapidAPI-Key": "026d94561dmsh3f279550ac22121p153a73jsn29f74346801c",
       "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
