@@ -39,6 +39,7 @@ main {
 .letter-container {
   background-color: transparent;
   perspective: 1000px;
+  border-radius: 5px;
 }
 
 .letter-inner {
@@ -49,6 +50,7 @@ main {
   transition: transform 0.6s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .letter-container-active .letter-inner {
@@ -66,6 +68,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 }
 
 /* .letter-front {
