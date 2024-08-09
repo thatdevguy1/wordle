@@ -65,7 +65,7 @@ function getWordFromAPI() {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "026d94561dmsh3f279550ac22121p153a73jsn29f74346801c",
+      "X-RapidAPI-Key": "", //add your own key here
       "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
     },
   };
